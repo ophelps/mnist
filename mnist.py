@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 #desired output is y
 #actual output is A
@@ -15,7 +16,7 @@ def cost(desired, actual):
     return (desired - actual)**2
 
 def costPrime(desired, actual):
-    return 2*(desired - actual)
+    return 2 * (desired - actual)
 
 def sig(x):
     return 1/(1 + np.exp(-x))
@@ -38,3 +39,37 @@ def costToInput(weight, input, bias, desired):
 
 def costToBias(weight, input, bias, desired):
     return costToOutput(weight, input, bias, desired)
+
+def costToBias(z, desired)
+
+class InputNode:
+    def __init__(self, val):
+        self.val = val
+
+    def __str(self):
+        print(self.val)
+
+class Node:
+    def __init__(self, nodeTree):
+
+        self.weights = []
+        for previousNode in range(len(nodeTree[-1])):
+            self.weights.append(random.random() * 2 - 1)
+        
+        self.bias = random.random() * 2 - 1
+
+def createNodeTree(inputSize):
+    inputLayer = []
+    for i in range(inputSize):
+        inputLayer.append(InputNode(0))
+    
+    nodeTree = [inputLayer]
+    return nodeTree
+
+def addLayer(nodeTree, layerSize):
+    currLayer = []
+
+    for i in range(layerSize):
+        inputLayer.append(Node(nodeTree))
+
+z = calculateZ(weight, input, bias)
