@@ -68,6 +68,13 @@ class NeuralNet:
 
         self.forward_prop()
 
+    def mnistPredict(self, inputVec):
+        self.analyze(inputVec)
+
+        outputs = self.nodes[-1][:self.outputSize]
+
+        return np.argmax(outputs)
+
     def forward_prop(self):
         for layerNum in range(len(self.weights)):
 
