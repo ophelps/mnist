@@ -10,7 +10,7 @@ def calculateZ(weight, input, bias):
     return (weight*input)+bias
 
 def actual(weight, input, bias):
-    return sig(z(weight, input, bias))
+    return sigmoid(calculateZ(weight, input, bias))
 
 def cost(desired, actual):
     return (desired - actual)**2
@@ -18,10 +18,10 @@ def cost(desired, actual):
 def costPrime(desired, actual):
     return 2 * (desired - actual)
 
-def sig(x):
+def sigmoid(x):
     return 1/(1 + np.exp(-x))
 
-def sigPrime(x):
+def sigmoidPrime(x):
     u = np.exp(-x)
     return u/((1+u)**2)
 
@@ -29,7 +29,7 @@ def sigPrime(x):
 
 def costToOutput(weight, input, bias, desired):
     z = calculateZ(weight, input, bias)
-    return sigPrime(z) * costPrime(desired, actual(z))
+    return sigmoidPrime(z) * costPrime(desired, actual(z))
 
 def costToWeight(weight, input, bias, desired):
     return input * costToOutput(weight, input, bias, desired)
@@ -40,36 +40,20 @@ def costToInput(weight, input, bias, desired):
 def costToBias(weight, input, bias, desired):
     return costToOutput(weight, input, bias, desired)
 
-def costToBias(z, desired)
+class NeuralNet:
+    def __init__(self, inputSize, outputSize, weightSizes):
+        maxSize = max(inputSize, outputSize, *weightSizes)
 
-class InputNode:
-    def __init__(self, val):
-        self.val = val
+        numLayers = len(weightSizes) + 2
 
-    def __str(self):
-        print(self.val)
+        normalize = lambda x: x * 2 - 1
 
-class Node:
-    def __init__(self, nodeTree):
+        self.weights = normalize(np.random.rand(numLayers - 1, maxSize, maxSize))
+        self.biases = normalize(np.random.rand(numLayers, maxSize))
 
-        self.weights = []
-        for previousNode in range(len(nodeTree[-1])):
-            self.weights.append(random.random() * 2 - 1)
-        
-        self.bias = random.random() * 2 - 1
+        self.zs = self.biases.copy()
 
-def createNodeTree(inputSize):
-    inputLayer = []
-    for i in range(inputSize):
-        inputLayer.append(InputNode(0))
-    
-    nodeTree = [inputLayer]
-    return nodeTree
+        self.nodes = sigmoid(self.zs)
 
-def addLayer(nodeTree, layerSize):
-    currLayer = []
 
-    for i in range(layerSize):
-        inputLayer.append(Node(nodeTree))
-
-z = calculateZ(weight, input, bias)
+net = NeuralNet(4, 2, [3])
